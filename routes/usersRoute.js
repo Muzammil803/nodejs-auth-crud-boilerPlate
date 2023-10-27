@@ -1,14 +1,11 @@
 const express =require('express')
+const { signup, signin } = require('../controllers/userController')
 
 const usersRoute =express.Router()
 
-usersRoute.post("/signup",(req,res)=>{
- res.send("signup")
-})
+usersRoute.post("/signup",signup)
 
-usersRoute.post("/signin",(req,res)=>{
-    res.send("sign in")
-   })
+usersRoute.post("/signin",signin)
 
 
 
