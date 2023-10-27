@@ -3,6 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "DEVATHONE";
 
+
+//  <---------- sign up ---------------------->
+
 const signup = async (req, res) => {
   try {
     const { username, password, email } = req.body;
@@ -27,6 +30,8 @@ const signup = async (req, res) => {
     res.status(500).json({message:"something went wrong"})
   }
 };
+
+//  <---------- sign in ---------------------->
 
 const signin = async(req, res) => {
     const {email,password}=req.body
