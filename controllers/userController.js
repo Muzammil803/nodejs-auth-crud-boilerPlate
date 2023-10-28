@@ -54,4 +54,14 @@ const signin = async(req, res) => {
 
 };
 
-module.exports = { signup, signin };
+const getAllUsers=async(req,res)=>{
+  try {
+    const users = await userModel.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+
+}
+
+module.exports = { signup, signin ,getAllUsers};
