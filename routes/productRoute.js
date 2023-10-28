@@ -1,13 +1,13 @@
 const express =require('express')
 const { getProduct, addProduct, deleteProduct, updateProduct } = require('../controllers/productController')
-const auth=require("../middleware/auth")
+// const auth=require("../middleware/auth")
 const productRoute =express.Router()
 
-productRoute.get("/",auth,getProduct)
+productRoute.get("/",getProduct)
 
-productRoute.post("/",auth,addProduct)
-productRoute.delete("/:id",auth,deleteProduct)
-productRoute.put("/:id",auth,updateProduct)
+productRoute.post("/",addProduct)
+productRoute.delete("/:id",deleteProduct)
+productRoute.put("/:id",updateProduct)
 
 
 
