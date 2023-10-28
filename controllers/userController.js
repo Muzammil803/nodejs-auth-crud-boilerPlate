@@ -64,4 +64,33 @@ const getAllUsers=async(req,res)=>{
 
 }
 
-module.exports = { signup, signin ,getAllUsers};
+const updateUserData = async (req, res) => {
+  try {
+    const userId = req.params.id; // Get the user ID from the URL parameter
+
+    const { username, email, newPassword } = req.body; // You can pass the updated data in the request body
+
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update the user's data
+    if (username) user.username = username;
+    if (email) user.email = email;
+
+    if (newPassword) {
+      // If a new password is provided, hash it and update the password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword;
+    }
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({ message: "User data updated successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+module.exports = { signup, signin ,getAllUsers,updateUserData};
